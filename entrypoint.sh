@@ -1,6 +1,13 @@
 #!/usr/bin/env sh
 set -eu
 
+: "${SSH_PRIVATE_KEY:?SSH_PRIVATE_KEY is required}"
+
+# Write private key to the path sync.sh's SSH_KEY default already expects.
+mkdir -p /root/.ssh
+install -m 600 /dev/null /root/.ssh/id_ed25519
+printf '%s\n' "${SSH_PRIVATE_KEY}" > /root/.ssh/id_ed25519
+
 SYNC_INTERVAL_MINUTES="${SYNC_INTERVAL_MINUTES:-10}"
 
 # Validate interval is a positive integer

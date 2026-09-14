@@ -14,9 +14,11 @@ router being synced) lives in [`laforcem/homelab`](https://github.com/laforcem/h
 
 ## Required environment
 
-See `.env.example`. `ROUTER_HOST`/`ROUTER_USER` (+ an SSH key mounted at
-`/root/.ssh/id_ed25519`) for the router; `AGH_URL`/`AGH_USER`/`AGH_PASSWORD`
-for AdGuard Home's API.
+See `.env.example`. `ROUTER_HOST`/`ROUTER_USER`/`SSH_PRIVATE_KEY` for the
+router (the key is written to `/root/.ssh/id_ed25519` at container start,
+see `entrypoint.sh` — not a bind-mounted file, so it works as a plain
+env-var secret through doco-cd's `external_secrets`); `AGH_URL`/`AGH_USER`/
+`AGH_PASSWORD` for AdGuard Home's API.
 
 ## Tests
 
